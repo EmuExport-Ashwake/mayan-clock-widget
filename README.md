@@ -1,6 +1,6 @@
 # Mayan Clock Widget
 
-This repository contains a **Mayan Calendar Clock Widget** for Windows with optional **Snap-to-Taskbar** mode.
+This repository contains a **Mayan Calendar Clock Widget** for Windows with optional Snap-to-Taskbar mode.
 
 ## Features
 - Mayan Long Count, Tzolk'in, Haab dates
@@ -18,4 +18,3 @@ This repository contains a **Mayan Calendar Clock Widget** for Windows with opti
 pip install -r requirements.txt
 pyinstaller --noconfirm --clean mayan_clock_widget_with_snap.spec
 ```
-

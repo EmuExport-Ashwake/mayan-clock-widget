@@ -1,8 +1,5 @@
-"mayan_clock_widget_with_snap.spec"
-# PyInstaller spec for building a single exe of the Mayan widget.
-# Usage: pyinstaller mayan_clock_widget_with_snap.spec
-# Replace icon with your own if desired.
-# Note: include Qt plugins and data as needed by PyInstaller on your system.
+
+# -*- mode: python ; coding: utf-8 -*-
 block_cipher = None
 
 a = Analysis(['mayan_clock_widget_with_snap.py'],
@@ -15,10 +12,10 @@ a = Analysis(['mayan_clock_widget_with_snap.py'],
              excludes=[],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
+             cipher=block_cipher,
+             noarchive=False)
+pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
-
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
-
 exe = EXE(pyz,
           a.scripts,
           [],
@@ -29,5 +26,10 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False )
-
-coll = COLLECT(exe, a.binaries, a.zipfiles, a.datas, strip=False, upx=True, name='MayanClockWidget')
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               name='MayanClockWidget')
