@@ -1,0 +1,36 @@
+name: Build Mayan Clock Widget
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install --upgrade pip
+      - run: pip install PySide6 pyinstaller
+
+      - name: Build EXE with PySide6 plugins
+        shell: powershell
+        run: |
+          $sitePackages = (python -c "import site; print(site.getsitepackages()[0])")
+          $pluginsDir = Join-Path $sitePackages "PySide6\Qt\plugins"
+          pyinstaller --noconfirm --clean --add-data "$pluginsDir;PySide6/Qt/plugins" mayan_clock_widget_with_snap.spec
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MayanClockWidget
+          path: dist/MayanClockWidget/*
